@@ -48,11 +48,7 @@ def get_watched_avg_rating(user_data):
         avg_rating = total_rating/len(user_data["watched"])
     return avg_rating
 
-<<<<<<< HEAD
 
-
-
-=======
 #2
 def get_most_watched_genre(user_data):
     #user_Data={"watched":[{"genre":a}{"genre":b}{"genre":c}]}
@@ -63,7 +59,6 @@ def get_most_watched_genre(user_data):
         genre_count = Counter(movie["genre"] for movie in user_data["watched"])
         most_watched_genre = genre_count.most_common(1)[0][0]     
         return most_watched_genre
->>>>>>> ce0cc33ef1e82cca3c9fe34c4dea6b8bb1ef3633
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -120,8 +115,33 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
-
 # -----------------------------------------
+def get_available_recs(user_data):
+    # Step 1: Get a list of movies that friends have watched, with no duplicate titles
+    friend_watched_list = set()
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friend_watched_list.add(movie["title"])
+    
+    # Step 2: Filter out movies that the user has already watched
+    user_watched_list = set()
+    for movie in user_data["watched"]:
+        user_watched_list.add(movie["title"])
+
+    friend_watched_user_not_list = []
+    for title in friend_watched_list:
+        if title not in user_watched_list:
+            friend_watched_user_not_list.append(title)
+
+    # Step 3: From the remaining movies, find those hosted on platforms the user subscribes to
+    movie_in_host = []
+    for friend in user_data ["friends"]:
+        for movie in friend["watched"]:
+            if (movie["title"] in friend_watched_user_not_list and movie["host"] in user_data["subscriptions"] and movie not in movie_in_host):
+                movie_in_host.append(movie)
+    return movie_in_host
+
+    
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
