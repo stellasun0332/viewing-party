@@ -46,12 +46,6 @@ def get_watched_avg_rating(user_data):
         avg_rating = total_rating/len(user_data["watched"])
     return avg_rating
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 924f0031d4e7c9ce024ce97db8a5446864813fa4
 #2
 def get_most_watched_genre(user_data):
     #user_Data={"watched":[{"genre":a}{"genre":b}{"genre":c}]}
@@ -176,7 +170,7 @@ def get_rec_from_favorites(user_data):
             friends_watched_titles.append(movie["title"])
     
 
-    for movies in favorites:
+    for movie in favorites:
         if (movie["title"]) not in friends_watched_titles:
             recommended_movies.append(movie)
     
