@@ -46,6 +46,12 @@ def get_watched_avg_rating(user_data):
         avg_rating = total_rating/len(user_data["watched"])
     return avg_rating
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 924f0031d4e7c9ce024ce97db8a5446864813fa4
 #2
 def get_most_watched_genre(user_data):
     #user_Data={"watched":[{"genre":a}{"genre":b}{"genre":c}]}
@@ -142,4 +148,36 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
 
+    most_frequent_genre = get_most_watched_genre(user_data)
+
+    #Determine a list of recommended movies. 
+    recommended_movies = []
+
+    #List of titles the user has already watched
+    user_watched_titles = [movie["title"] for movie in user_data["watched"]]
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            if (movie["title"] not in user_watched_titles and
+                movie["genre"] == most_frequent_genre and
+                movie not in recommended_movies):
+                recommended_movies.append(movie)
+    return recommended_movies
+
+def get_rec_from_favorites(user_data):
+    favorites = user_data["favorites"]
+    friends_watched_titles = []
+    recommended_movies = []
+
+    for friend in user_data["friends"]:
+        for movie in friend["watched"]:
+            friends_watched_titles.append(movie["title"])
+    
+
+    for movies in favorites:
+        if (movie["title"]) not in friends_watched_titles:
+            recommended_movies.append(movie)
+    
+    return recommended_movies
