@@ -112,6 +112,22 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
+# method 1 
+def get_available_recs(user_data):
+    # Step 1: Get friends' unique watched movies using Wave 3
+    friends_unique_watched = get_friends_unique_watched(user_data)
+
+    # Step 2: From these movies, filter out those hosted on platforms the user subscribes to
+    subscriptions = user_data["subscriptions"]
+    recommended_movies = []
+
+    for movie in friends_unique_watched:
+        if movie["host"] in subscriptions:
+            recommended_movies.append(movie)
+
+    return recommended_movies
+
+# method 2
 def get_available_recs(user_data):
     # Step 1: Get a list of movies that friends have watched, with no duplicate titles
     friend_watched_list = set()
