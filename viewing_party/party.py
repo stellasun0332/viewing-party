@@ -174,7 +174,7 @@ def get_rec_from_favorites(user_data):
             friends_watched_titles.append(movie["title"])
     
 
-    for movies in favorites:
+    for movie in favorites:
         if (movie["title"]) not in friends_watched_titles:
             recommended_movies.append(movie)
     
