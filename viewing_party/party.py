@@ -1,5 +1,4 @@
 # ------------- WAVE 1 --------------------
-from collections import defaultdict
 import copy
 from collections import Counter
 
@@ -36,7 +35,6 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
-
 #1
 def get_watched_avg_rating(user_data):
     total_rating = 0 
@@ -47,9 +45,6 @@ def get_watched_avg_rating(user_data):
             total_rating += movie["rating"]
         avg_rating = total_rating/len(user_data["watched"])
     return avg_rating
-
-
-
 
 #2
 def get_most_watched_genre(user_data):
@@ -117,7 +112,6 @@ def get_friends_unique_watched(user_data):
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
-# -----------------------------------------
 def get_available_recs(user_data):
     # Step 1: Get a list of movies that friends have watched, with no duplicate titles
     friend_watched_list = set()
@@ -139,11 +133,13 @@ def get_available_recs(user_data):
     movie_in_host = []
     for friend in user_data ["friends"]:
         for movie in friend["watched"]:
-            if (movie["title"] in friend_watched_user_not_list and movie["host"] in user_data["subscriptions"] and movie not in movie_in_host):
+            if (movie["title"] in friend_watched_user_not_list 
+                and movie["host"] in user_data["subscriptions"] 
+                and movie not in movie_in_host):
                 movie_in_host.append(movie)
     return movie_in_host
 
-    
+# -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 def get_new_rec_by_genre(user_data):
